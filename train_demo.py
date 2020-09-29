@@ -48,7 +48,7 @@ def main():
            help='val after training how many iters')
     parser.add_argument('--model', default='proto',
             help='model name')
-    parser.add_argument('--encoder', default='cnn',
+    parser.add_argument('--encoder', default='bert',
             help='encoder: cnn or bert or roberta')
     parser.add_argument('--max_length', default=128, type=int,
            help='max length')
