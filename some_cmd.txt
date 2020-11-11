@@ -1,0 +1,17 @@
+pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
+
+docker build -t torch_160_apex .
+
+
+python convert_electra_original_tf_checkpoint_to_pytorch.py \
+--tf_checkpoint_path ./pretrain/electra_small \
+--config_file ./pretrain/electra_small_torch/config.json \
+--pytorch_dump_path ./pretrain/electra_small_torch/pytorch_model.bin \
+--discriminator_or_generator discriminator
+
+
+python train_demo.py \
+    --trainN 5 --N 5 --K 5 --Q 1 \
+    --model pair --encoder electra --pair --hidden_size 768 --val_step 1000 \
+    --batch_size 8  --fp16 \

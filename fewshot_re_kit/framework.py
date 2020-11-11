@@ -1,16 +1,18 @@
 import os
-import sklearn.metrics
-import numpy as np
 import sys
 import time
-from . import sentence_encoder
-from . import data_loader
+
+import numpy as np
+import sklearn.metrics
 import torch
-from torch import autograd, optim, nn
+from torch import autograd, nn, optim
 from torch.autograd import Variable
 from torch.nn import functional as F
 # from pytorch_pretrained_bert import BertAdam
 from transformers import AdamW, get_linear_schedule_with_warmup
+
+from . import data_loader, sentence_encoder
+
 
 def warmup_linear(global_step, warmup_step):
     if global_step < warmup_step:
@@ -327,6 +329,7 @@ class FewShotREFramework:
 
         iter_right = 0.0
         iter_sample = 0.0
+
         with torch.no_grad():
             for it in range(eval_iter):
                 if pair:
